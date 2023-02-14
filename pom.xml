@@ -41,7 +41,7 @@
 	</dependencies>
 
 	<build>
-	<!--<finalName>demo-jenkins</finalName>-->
+		<finalName>demo-jenkins</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
