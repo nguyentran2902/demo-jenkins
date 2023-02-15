@@ -16,9 +16,9 @@ node {
 		        env.PATH = "${dockerHome}/bin:${env.PATH}"
 		    }
           stage('Build docker') {
-         	 def WORKSPACE = "/var/lib/jenkins/workspace/demo-jenkins"
-   			 def dockerImageTag = "demo-jenkins:${env.BUILD_NUMBER}"
-                 dockerImage = docker.build(dockerImageTag)
+         	// def WORKSPACE = "/var/lib/jenkins/workspace/demo-jenkins"
+   			 //def dockerImageTag = "demo-jenkins:${env.BUILD_NUMBER}"
+                 sh 'docker build -t nguyen2902/demo-jenkins:0.0.1 .'
           }
 
           stage('Deploy docker'){
