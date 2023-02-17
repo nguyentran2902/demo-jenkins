@@ -1,3 +1,4 @@
+
 package com.nguyentran.demojenkins;
 
 import org.springframework.boot.SpringApplication;
@@ -15,6 +16,6 @@ public class DemoJenkinsApplication {
 
 	@GetMapping("/home")
 	public String goHome() {
-		return "home";
+		return "home here";
 	}
 }

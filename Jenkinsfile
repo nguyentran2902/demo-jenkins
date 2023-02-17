@@ -1,5 +1,4 @@
 node {
-   
 
     try{
 //          notifyBuild('STARTED')
@@ -9,16 +8,15 @@ node {
             git url: 'https://github.com/nguyentran2902/demo-jenkins.git',
                 //credentialsId: 'springdeploy-user',
                 branch: 'main'
-         }
-         
+         }       
           stage('Initialize'){
 		        def dockerHome = tool 'myDocker'
 		        env.PATH = "${dockerHome}/bin:${env.PATH}"
 		    }
           stage('Build docker') {
          	// def WORKSPACE = "/var/lib/jenkins/workspace/demo-jenkins"
-   			 //def dockerImageTag = "demo-jenkins:${env.BUILD_NUMBER}"
-                 sh 'docker build -t nguyen2902/demo-jenkins:0.0.1 .'
+   			 def dockerImageTag = "demo-jenkins:${env.BUILD_NUMBER}"
+             sh 'docker build -t nguyen2902/demo-jenkins:${dockerImageTag} .'
           }
 
           stage('Deploy docker'){
@@ -27,13 +25,13 @@ node {
                   sh "docker run --name demo-jenkins -d -p 8081:8081 demo-jenkins:${env.BUILD_NUMBER}"
           }
     }catch(e){
-//         currentBuild.result = "FAILED"
-        throw e
+			currentBuild.result = "FAILED"
+       		 throw e
     }finally{
-//         notifyBuild(currentBuild.result)
     }
 }
 
+//         notifyBuild(currentBuild.result)
 def notifyBuild(String buildStatus = 'STARTED'){
 
 // build status of null means successful
